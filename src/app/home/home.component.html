@@ -1,0 +1,29 @@
+<div class="container-fluid p-5 colorbg-dark">
+  <h1 class="m-3">Cambio de moneda</h1>
+  <div class="subcontainer col-lg-8 my-3">
+    <form [formGroup]="formularioDatos">
+      <div class="form-group">
+        <label for="">Fecha</label>
+        <input (change)="validar($event.target)" type="date" #fecha class="form-control" formControlName="fecha" max="{{auxToday}}">
+      </div>
+      <div class="row mt-3">
+        <div class="form-group col-lg-8">
+          <label for="">Cantidad a convertir</label>
+          <input (keydown)="calcularResultado()" type="number" class="form-control" formControlName="cantidad" min="0">
+        </div>
+        <div class="form-group col-lg-4">
+          <label for="">Tipo de moneda</label>
+          <select  #option (change)="calcularResultado()" class="form-control" name="" id="" formControlName="tipo">
+            <option *ngFor="let rate of rates | keyvalue" value={{rate.key+rate.value}}>{{rate.key}}</option>
+          </select>
+        </div>
+      </div>
+    </form>
+    <div>
+      <!-- {{formularioDatos.value | json}} -->
+    </div>
+  </div>
+  <div class="result container mt-3 box col-lg-8">
+    <h4>Resultado: <strong>{{resultado === undefined ? '' : resultado}} {{denominacion === undefined ? '' : denominacion}}</strong></h4>
+  </div>
+</div>
